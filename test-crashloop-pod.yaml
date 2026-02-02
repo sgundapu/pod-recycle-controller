@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: crashloop-test
+  namespace: default
+  labels:
+    app: crashloop-test
+spec:
+  restartPolicy: Always
+  containers:
+  - name: crasher
+    image: busybox:latest
+    command:
+    - /bin/sh
+    - -c
+    - |
+      echo "Starting container at $(date)"
+      echo "Will crash in 20 seconds..."
+      sleep 20
+      echo "Crashing now!"
+      exit 1

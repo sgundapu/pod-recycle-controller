@@ -4,7 +4,6 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"os"
 	"time"
 
 	corev1 "k8s.io/api/core/v1"
@@ -54,6 +53,11 @@ func watchPods(clientset *kubernetes.Clientset) {
 		for event := range watcher.ResultChan() {
 			pod, ok := event.Object.(*corev1.Pod)
 			if !ok {
+				continue
+			}
+
+			// Skip if pod is already being deleted
+			if pod.DeletionTimestamp != nil {
 				continue
 			}
 

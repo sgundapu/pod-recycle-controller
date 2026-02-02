@@ -44,5 +44,5 @@ spec:
       serviceAccountName: pod-recycle-controller
       containers:
       - name: controller
-        image: pod-recycle-controller:latest
-        imagePullPolicy: IfNotPresent
+        image: 231054688549.dkr.ecr.us-west-2.amazonaws.com/pod-recycle-controller:latest
+        imagePullPolicy: Always
